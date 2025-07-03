@@ -1,3 +1,4 @@
+
 /*
 This code is provided to give you a
 starting place. It should be modified.
@@ -30,15 +31,65 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
 
-public class Main
-{
-	public static void main(String[] args) 
-	{
-		
-		System.out.println();
-		
-		
-		
+public class Main {
+	public static void main(String[] args) {
+		if (args.length < 1) {
+			System.out.println("Please provide a matrix file as a command-line argument.");
+			return;
+		}
+
+		try (Scanner fileReader = new Scanner(new File(args[0]))) {
+			// Read dimensions
+			int rows = fileReader.nextInt();
+			int cols = fileReader.nextInt();
+
+			// Read matrices A and B
+			int[][] A = matrixFromFile(rows, cols, fileReader);
+			int[][] B = matrixFromFile(rows, cols, fileReader);
+
+			// Create result matrix C
+			int[][] C = new int[rows][cols];
+
+			// Calculate submatrix boundaries
+			int midRow = (rows + 1) / 2; // Ceiling to handle odd rows
+			int midCol = (cols + 1) / 2; // Ceiling to handle odd cols
+
+			// Create and start threads for each quadrant
+			ThreadOperation[] threads = new ThreadOperation[4];
+			threads[0] = new ThreadOperation(A, B, C, 0, 0, midRow, midCol, "00");
+			threads[1] = new ThreadOperation(A, B, C, 0, midCol, midRow, cols, "01");
+			threads[2] = new ThreadOperation(A, B, C, midRow, 0, rows, midCol, "10");
+			threads[3] = new ThreadOperation(A, B, C, midRow, midCol, rows, cols, "11");
+
+			for (ThreadOperation thread : threads) {
+				thread.start();
+			}
+
+			// Join threads to ensure completion
+			for (ThreadOperation thread : threads) {
+				try {
+					thread.join();
+				} catch (InterruptedException e) {
+					System.out.println("Thread interrupted: " + e.getMessage());
+				}
+			}
+
+			// Print result matrix
+			print2dArray(C);
+
+			// Test print2dArray with a sample array
+			int[][] testArray = {
+					{ 1, 2, 3 },
+					{ 4, 5, 6 },
+					{ 7, 8, 9 }
+			};
+			System.out.println("\nTest 2D Array:");
+			print2dArray(testArray);
+
+		} catch (IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
+		}
+
 	}
 
 }
