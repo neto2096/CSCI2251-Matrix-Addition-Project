@@ -1,5 +1,12 @@
 
 /*
+Name: Ernesto Morales Carrasco
+Email: emoralescarras@cnm.edu
+Assignment: Matrix Addition Part 1
+Purpose: Reads two matrices from a file, splits them into four submatrices, 
+creates threads to perform addition on each submatrix pair, and prints the resulting matrix.
+
+
 This code is provided to give you a
 starting place. It should be modified.
 No further imports are needed.
@@ -91,6 +98,16 @@ public class Main {
 		}
 	}
 
+	/**
+     * Reads a matrix of specified dimensions from a file using a Scanner.
+     * Expects rows * cols integers in row-major order.
+     *
+     * @param rows Number of rows in the matrix
+     * @param cols Number of columns in the matrix
+     * @param fileReader Scanner object reading from the input file
+     * @return A 2D integer array representing the matrix
+     * @throws IllegalArgumentException if the file lacks sufficient data or contains invalid input
+     */
 	public static int[][] matrixFromFile(int rows, int cols, Scanner fileReader) {
 		int[][] matrix = new int[rows][cols];
 		for (int i = 0; i < rows; i++) {
@@ -101,6 +118,12 @@ public class Main {
 		return matrix;
 	}
 
+	/**
+     * Prints a 2D integer array to the console with aligned columns using printf.
+     * Each element is formatted to occupy 4 spaces for consistent alignment.
+     *
+     * @param matrix The 2D integer array to print
+     */
 	public static void print2dArray(int[][] matrix) {
 		for (int[] row : matrix) {
 			for (int value : row) {
