@@ -1,0 +1,10 @@
+public class ThreadOperation extends Thread {
+    private final int[][] A;
+    private final int[][] B;
+    private final int[][] C;
+    private final int startRow;
+    private final int startCol;
+    private final int endRow;
+    private final int endCol;
+    private final String quadrant;
+}
