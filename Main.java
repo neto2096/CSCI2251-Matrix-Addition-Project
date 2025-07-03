@@ -16,6 +16,15 @@ threads compared to processes, etcetera,
 and connect these issues to 
 multi-threading.
 
+Multi-threading minimizes resource usage by allowing concurrent 
+execution on multicore machines, efficiently utilizing processor 
+cycles as threads share the same memory space, unlike processes 
+which require separate memory allocations. By splitting tasks, 
+threads can process independent data simultaneously, reducing 
+time during I/O operations. Compared to processes, threads are 
+lightweight, reducing memory and optimizing performance for
+ computationally intensive tasks.
+
 */
 import java.io.IOException;
 import java.io.File;
