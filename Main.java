@@ -89,7 +89,24 @@ public class Main {
 		} catch (IOException e) {
 			System.out.println("Error reading file: " + e.getMessage());
 		}
-
 	}
 
+	public static int[][] matrixFromFile(int rows, int cols, Scanner fileReader) {
+		int[][] matrix = new int[rows][cols];
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				matrix[i][j] = fileReader.nextInt();
+			}
+		}
+		return matrix;
+	}
+
+	public static void print2dArray(int[][] matrix) {
+		for (int[] row : matrix) {
+			for (int value : row) {
+				System.out.printf("%4d", value);
+			}
+			System.out.println();
+		}
+	}
 }
