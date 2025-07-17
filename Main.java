@@ -57,20 +57,14 @@ public class Main {
 			// Create result matrix C
 			int[][] C = new int[rows][cols];
 
-			// Calculate submatrix boundaries
-			int midRow = (rows + 1) / 2; // Ceiling to handle odd rows
-			int midCol = (cols + 1) / 2; // Ceiling to handle odd cols
-
 			// Create and start threads for each quadrant
 			ThreadOperation[] threads = new ThreadOperation[4];
-			threads[0] = new ThreadOperation(A, B, C, 0, 0, midRow, midCol, "00");
-			threads[1] = new ThreadOperation(A, B, C, 0, midCol, midRow, cols, "01");
-			threads[2] = new ThreadOperation(A, B, C, midRow, 0, rows, midCol, "10");
-			threads[3] = new ThreadOperation(A, B, C, midRow, midCol, rows, cols, "11");
-
-			for (ThreadOperation thread : threads) {
-				thread.start();
-			}
+			String[] quadrants = {"00", "01", "10", "11"};
+            for (int i = 0; i < 4; i++) {
+                int[] indexes = ThreadOperation.getQuadrantIndexes(rows, cols, quadrants[i]);
+                threads[i] = new ThreadOperation(A, B, C, indexes[0], indexes[2], indexes[1], indexes[3], quadrants[i]);
+                threads[i].start();
+            }
 
 			// Join threads to ensure completion
 			for (ThreadOperation thread : threads) {
@@ -83,15 +77,6 @@ public class Main {
 
 			// Print result matrix
 			print2dArray(C);
-
-			// Test print2dArray with a sample array
-			int[][] testArray = {
-					{ 1, 2, 3 },
-					{ 4, 5, 6 },
-					{ 7, 8, 9 }
-			};
-			System.out.println("\nTest 2D Array:");
-			print2dArray(testArray);
 
 		} catch (IOException e) {
 			System.out.println("Error reading file: " + e.getMessage());
