@@ -1,0 +1,26 @@
+Below is the code used to create the UML diagram using plantUML:
+@startuml
+class Main {
+  +main(args: String[]): void
+  +matrixFromFile(rows: int, cols: int, fileReader: Scanner): int[][]
+  +print2dArray(matrix: int[][]): void
+}
+
+class ThreadOperation {
+  -A: int[][]
+  -B: int[][]
+  -C: int[][]
+  -startRow: int
+  -startCol: int
+  -endRow: int
+  -endCol: int
+  -quadrant: String
+  +ThreadOperation(A: int[][], B: int[][], C: int[][], startRow: int, startCol: int, endRow: int, endCol: int, quadrant: String)
+  +run(): void
+  +getQuadrantIndexes(rows: int, columns: int, quadrant: String): int[]
+}
+
+ThreadOperation --|> Thread
+Main "1" --> "1..4" ThreadOperation : creates
+
+@enduml
