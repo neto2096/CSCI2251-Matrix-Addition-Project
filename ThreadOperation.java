@@ -1,7 +1,7 @@
 /*
 Name: Ernesto Morales Carrasco
 Email: emoralescarras@cnm.edu
-Assignment: Matrix Addition Part 2
+Assignment: Matrix Addition Part 1
 Purpose: Extends Thread to perform addition of two submatrices (from matrices A and B) 
 in a specified quadrant, storing the result in a shared matrix C, enabling concurrent processing for efficiency.
 */
@@ -14,6 +14,7 @@ public class ThreadOperation extends Thread {
     private final int startCol;
     private final int endRow;
     private final int endCol;
+    private final String quadrant;
 
     /**
      * Constructs a ThreadOperation to add submatrices of A and B within a specified
@@ -30,7 +31,8 @@ public class ThreadOperation extends Thread {
      * @param quadrant String identifier for the quadrant (e.g., "00" for
      *                 upper-left)
      */
-    public ThreadOperation(int[][] A, int[][] B, int[][] C, int startRow, int startCol, int endRow, int endCol) {
+    public ThreadOperation(int[][] A, int[][] B, int[][] C, int startRow, int startCol, int endRow, int endCol,
+            String quadrant) {
         this.A = A;
         this.B = B;
         this.C = C; // Shared result matrix
@@ -38,6 +40,7 @@ public class ThreadOperation extends Thread {
         this.startCol = startCol;
         this.endRow = endRow;
         this.endCol = endCol;
+        this.quadrant = quadrant;
     }
 
     /**
