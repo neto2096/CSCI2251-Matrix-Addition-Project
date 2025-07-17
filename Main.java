@@ -2,7 +2,7 @@
 /*
 Name: Ernesto Morales Carrasco
 Email: emoralescarras@cnm.edu
-Assignment: Matrix Addition Part 1
+Assignment: Matrix Addition Part 2
 Purpose: Reads two matrices from a file, splits them into four submatrices, 
 creates threads to perform addition on each submatrix pair, and prints the resulting matrix.
 

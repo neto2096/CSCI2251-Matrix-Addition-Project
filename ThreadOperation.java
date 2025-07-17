@@ -1,7 +1,7 @@
 /*
 Name: Ernesto Morales Carrasco
 Email: emoralescarras@cnm.edu
-Assignment: Matrix Addition Part 1
+Assignment: Matrix Addition Part 2
 Purpose: Extends Thread to perform addition of two submatrices (from matrices A and B) 
 in a specified quadrant, storing the result in a shared matrix C, enabling concurrent processing for efficiency.
 */
